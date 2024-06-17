@@ -1,11 +1,14 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, unMounted } from 'vue';
 const counter = ref(0);
 const incrementCounter = () => {
     counter.value++;
 };
 onMounted(() => {
     console.log('ok')
+})
+unMounted(() => {
+    console.log('bye');
 })
 </script>
 
