@@ -1,12 +1,9 @@
 <script setup lang="ts">
-import CardDemo from './components/CardDemo.vue';
-import DemoCounter from './components/DemoCounter.vue';
-import HelloWorld from './components/HelloWorld.vue';
-import TheWelcome from './components/TheWelcome.vue'
+import PlanetListOption from './components/PlanetListOption.vue';
 </script>
 
 <template>
-  <DemoCounter />
+  <PlanetListOption></PlanetListOption>
 </template>
 
 <style scoped>
