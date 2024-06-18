@@ -24,6 +24,14 @@ export default {
                 .catch((err) => this.error = err)
                 .finally(() => this.loading = false)
         }
+    },
+    computed: {
+        isButtonDisabled() {
+            return !this.planets.previous
+        },
+        isButtonDisabled2() {
+            return !this.planets.next
+        }
     }
 }
 </script>

@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import PlanetListQuery from './components/PlanetListQuery.vue';
-
+import DxButton from 'devextreme-vue/button';
+import { Vue3Snackbar } from "vue3-snackbar";
 </script>
 
 <template>
-  <PlanetListQuery></PlanetListQuery>
+  <RouterView />
+  <Vue3Snackbar top right :duration="4000"></Vue3Snackbar>
+
 </template>
 
 <style scoped>

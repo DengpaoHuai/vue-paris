@@ -1,15 +1,22 @@
 <script setup>
-import { ref, onMounted, unMounted } from 'vue';
+import { ref, onMounted, } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+const router = useRouter();
+console.log(router)
+const route = useRoute();
+console.log(route)
 const counter = ref(0);
 const incrementCounter = () => {
     counter.value++;
+    if (counter.value === 3) {
+        router.push('/')
+    }
 };
 onMounted(() => {
     console.log('ok')
 })
-unMounted(() => {
-    console.log('bye');
-})
+
+
 </script>
 
 <template>

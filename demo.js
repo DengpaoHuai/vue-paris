@@ -1,15 +1,14 @@
-const person = {
-  name: 'John Doe',
-  age: 25,
-  getName: () => {
-    return this.name;
-  }
-};
 
-console.log(person.getName());
 
-const toto = () => 'toto';
+class Person {
+    constructor(name) {
+        this.name = name;
+    }
 
-function toto1() {
-  return 'toto';
+    greet() {
+        console.log(`Hello ${this.name}`);
+    }
 }
+
+const person = new Person('John');
+person.greet(); // Hello John
