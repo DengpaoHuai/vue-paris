@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { Planet, PlanetResponse } from '@/types/planets.type';
 import { onMounted, ref } from 'vue';
-
 const planets = ref<PlanetResponse>({
     count: 0,
     next: '',
@@ -10,13 +9,6 @@ const planets = ref<PlanetResponse>({
 })
 const loading = ref(true)
 const error = ref<string | null>(null)
-
-
-
-
-
-
-
 
 const getPlanets = (url: string) => {
     loading.value = true
@@ -27,14 +19,10 @@ const getPlanets = (url: string) => {
         .finally(() => loading.value = false)
 }
 
-
-
 onMounted(() => {
     getPlanets('https://swapi.dev/api/planets/')
 
 })
-
-
 
 </script>
 
@@ -51,6 +39,6 @@ onMounted(() => {
         </ul>
         <button :disabled="!planets.previous"
             @click="planets.previous && getPlanets(planets.previous)">précédent</button>
-        <button :disabled="!planets.next" @click="getPlanets(planets.next)">suivant</button>
+        <button :disabled="!planets.next" @click="planets.next && getPlanets(planets.next)">suivant</button>
     </div>
 </template>

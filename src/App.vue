@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import PlanetListOption from './components/PlanetListOption.vue';
+import PlanetListQuery from './components/PlanetListQuery.vue';
+
 </script>
 
 <template>
-  <PlanetListOption></PlanetListOption>
+  <PlanetListQuery></PlanetListQuery>
 </template>
 
 <style scoped>
