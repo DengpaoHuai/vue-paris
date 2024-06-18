@@ -1,5 +1,4 @@
 <script lang="ts">
-
 export default {
     data() {
         return {
@@ -13,7 +12,6 @@ export default {
             error: false
         }
     },
-
     mounted() {
         this.getPlanets('https://swapi.dev/api/planets/')
     },
@@ -28,8 +26,6 @@ export default {
         }
     }
 }
-
-
 </script>
 
 <template>
