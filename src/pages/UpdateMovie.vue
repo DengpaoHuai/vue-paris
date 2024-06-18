@@ -1,33 +1,30 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { onMounted, reactive } from 'vue';
 import { DxForm, DxGroupItem, DxSimpleItem, DxButtonItem } from 'devextreme-vue/form';
 import crudcrud from '@/instances/crudcrud';
 import { useSnackbar } from "vue3-snackbar";
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import type { Movie } from '@/types/movies.type';
 const snackbar = useSnackbar();
 const router = useRouter()
 
+
+const route = useRoute();
+const id = route.params.id as string
+const currentMovie = route.meta.movie as Movie
 const movieForm = reactive({
-    title: 'default',
-    director: '',
-    description: ''
+    title: currentMovie.title,
+    director: currentMovie.director,
+    description: currentMovie.description
 });
+
+
 
 const onSubmit = () => {
     console.log(movieForm);
-    /*  fetch("https://crudcrud.com/api/c921580c9c524d809d336c35350dfaf4/movies", {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify(movieForm)
-      }).then(response => {
-          console.log(response);
-      }).then(data => {
-          console.log(data);
-      });*/
 
-    crudcrud.post('/movies', movieForm).then(response => {
+
+    crudcrud.put('/movies/' + id, movieForm).then(response => {
         console.log(response);
         router.push("/list_movies")
         snackbar.add({
@@ -51,7 +48,7 @@ const submitButtonOptions = {
 </script>
 
 <template>
-    <form @submit.prevent="onSubmit" style="min-height : 150vh">
+    <form @submit.prevent="onSubmit">
         <DxForm id="form" :form-data="movieForm">
             <!-- Configuration goes here -->
             <DxGroupItem>

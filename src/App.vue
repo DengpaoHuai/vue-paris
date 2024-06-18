@@ -1,11 +1,18 @@
 <script setup lang="ts">
-import PlanetListQuery from './components/PlanetListQuery.vue';
-import DxButton from 'devextreme-vue/button';
 import { Vue3Snackbar } from "vue3-snackbar";
+import MainLayout from './layouts/MainLayout.vue';
+import { useRoute } from "vue-router";
+const route = useRoute();
+
+
+
 </script>
 
 <template>
-  <RouterView />
+  <component :is="route.meta.layout ?? 'DefaultLayout'">
+    <RouterView />
+  </component>
+
   <Vue3Snackbar top right :duration="4000"></Vue3Snackbar>
 
 </template>
