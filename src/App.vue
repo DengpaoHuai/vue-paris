@@ -2,14 +2,27 @@
 import { Vue3Snackbar } from "vue3-snackbar";
 import MainLayout from './layouts/MainLayout.vue';
 import { useRoute } from "vue-router";
+import HeaderDemo from "./components/HeaderDemo.vue";
+import { provide } from "vue";
 const route = useRoute();
 
-
+provide('name', (e) => {
+  console.log(e)
+})
 </script>
 
 <template>
   <component :is="route.meta.layout ?? 'DefaultLayout'">
-    <RouterView />
+    <template #default>
+      <RouterView />
+    </template>
+    <template #header>
+      <h1>header</h1>
+      <component :is="route.meta.header ? HeaderDemo : HeaderDemo"></component>
+    </template>
+    <template #footer>
+      <h1>footer</h1>
+    </template>
   </component>
 
   <Vue3Snackbar top right :duration="4000"></Vue3Snackbar>

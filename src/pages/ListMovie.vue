@@ -3,6 +3,7 @@ import { deleteMovieById, getMovieById, getMovies } from '@/services/movies.serv
 import useMovieStore from '@/store/useMovieStore';
 import type { Movie } from '@/types/movies.type';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/vue-query';
+import { inject, ref } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter()
 
@@ -49,10 +50,20 @@ const { mutate } = useMutation({
     },
 })
 
+const search = ref('')
+
+const searchMovies = () => {
+
+}
+
+const name = inject('myInjectedFunction')
+name('je veux afficher ça')
+
 </script>
 
 <template>
     <div style="min-height : 150vh">
+        <input type="text" v-selection v-model="search" @input="searchMovies" />
         <RouterLink to="/create_movie">Create Movie</RouterLink>
         <ul>
             <li v-for="movie in movies" :key="movie._id">

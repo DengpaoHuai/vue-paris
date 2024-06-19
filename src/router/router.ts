@@ -14,7 +14,8 @@ const routes = [
     component: PlanetListQuery,
     name: 'PlanetListQuery',
     meta: {
-      layout: 'MainLayout'
+      layout: 'MainLayout',
+      header: 'HeaderDemo'
     }
   },
   {

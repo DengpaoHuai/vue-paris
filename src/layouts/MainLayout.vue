@@ -22,7 +22,16 @@ watch(route, (...rest) => {
 <template>
     <div>
         <h1>header</h1>
+        <header>
+            <h3>mon header</h3>
+            <slot name="header"></slot>
+        </header>
         <slot></slot>
+        <footer>
+            <h3>mon footer</h3>
+            <slot name="footer"></slot>
+        </footer>
+
     </div>
 </template>
 

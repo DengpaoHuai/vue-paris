@@ -11,6 +11,7 @@ import router from './router/router';
 import MainLayout from './layouts/MainLayout.vue';
 import DefaultLayout from './layouts/DefaultLayout.vue';
 import { createPinia } from 'pinia';
+import plugin from './plugin';
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -32,6 +33,12 @@ app.use(VueQueryPlugin);
 app.use(router);
 app.use(SnackbarService);
 
+app.directive('selection', {
+  mounted(el) {
+    el.focus();
+  }
+});
+app.use(plugin);
 app.component('MainLayout', MainLayout);
 app.component('DefaultLayout', DefaultLayout);
 app.mount('#app');
