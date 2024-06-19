@@ -20,7 +20,7 @@ watch(route, (...rest) => {
 </script>
 
 <template>
-    <div :style="style">
+    <div>
         <h1>header</h1>
         <slot></slot>
     </div>

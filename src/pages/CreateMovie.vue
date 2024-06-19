@@ -1,11 +1,16 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { onMounted, reactive } from 'vue';
 import { DxForm, DxGroupItem, DxSimpleItem, DxButtonItem } from 'devextreme-vue/form';
 import crudcrud from '@/instances/crudcrud';
 import { useSnackbar } from "vue3-snackbar";
 import { useRouter } from 'vue-router';
+import useMovieStore from '@/store/useMovieStore';
 const snackbar = useSnackbar();
 const router = useRouter()
+const movieStore = useMovieStore()
+
+console.log(movieStore.addMovie)
+
 
 const movieForm = reactive({
     title: 'default',
@@ -29,6 +34,7 @@ const onSubmit = () => {
 
     crudcrud.post('/movies', movieForm).then(response => {
         console.log(response);
+        movieStore.addMovie(response.data)
         router.push("/list_movies")
         snackbar.add({
             type: 'info',
