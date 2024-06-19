@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const crudcrud = axios.create({
-  baseURL: 'https://crudcrud.com/api/cc3503746f544ae197ec99100204b7a5',
+  baseURL: 'https://crudcrud.com/api/4ab6c53878954fa19007abb64b177dac',
   headers: { 'Content-Type': 'application/json' }
 });
 

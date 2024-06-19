@@ -20,9 +20,15 @@ const useMovieStore = defineStore('movieStore', () => {
     movies.value.push(movie);
   };
 
+  const deleteMovieById = async (id: string) => {
+    await crudcrud.delete('movies/' + id);
+    movies.value = movies.value.filter((movie) => movie._id !== id);
+  };
+
   return {
     movies,
-    addMovie
+    addMovie,
+    deleteMovieById
   };
 });
 
