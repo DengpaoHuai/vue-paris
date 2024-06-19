@@ -2,7 +2,7 @@ import './assets/main.css';
 import 'devextreme/dist/css/dx.light.css';
 
 import { createApp } from 'vue';
-import { VueQueryPlugin } from '@tanstack/vue-query';
+import { QueryClient, VueQueryPlugin } from '@tanstack/vue-query';
 import { SnackbarService } from 'vue3-snackbar';
 import 'vue3-snackbar/styles';
 
@@ -14,8 +14,20 @@ import { createPinia } from 'pinia';
 
 const app = createApp(App);
 const pinia = createPinia();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 10000,
+      refetchOnWindowFocus: true,
+      retry: 2
+    }
+  }
+});
 
 app.use(pinia);
+app.use(VueQueryPlugin, {
+  queryClient: queryClient
+});
 app.use(VueQueryPlugin);
 app.use(router);
 app.use(SnackbarService);

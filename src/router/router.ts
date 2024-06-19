@@ -1,8 +1,11 @@
 import crudcrud from '@/instances/crudcrud';
+import { queryClient } from '@/main';
+import DashboardPage from '@/pages/DashboardPage.vue';
 import DemoCounter from '@/pages/DemoCounter.vue';
 import ListMovie from '@/pages/ListMovie.vue';
 import PlanetListQuery from '@/pages/PlanetListQuery.vue';
 import UpdateMovie from '@/pages/UpdateMovie.vue';
+import { getMovieById } from '@/services/movies.service';
 import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
@@ -40,19 +43,19 @@ const routes = [
       layout: 'MainLayout',
       movie: {}
     },
-    beforeEnter: (to, from, next) => {
+    beforeEnter: async (to, from, next) => {
       const id = to.params.id;
-      crudcrud
-        .get('/movies/' + id)
-        .then((response) => {
-          console.log(response);
-          to.meta.movie = response.data;
-          next();
-        })
-        .catch((error) => {
-          next();
-        });
+      await queryClient.prefetchQuery({
+        queryKey: ['movie', id],
+        queryFn: () => getMovieById(id),
+        staleTime: 10000
+      });
+      next();
     }
+  },
+  {
+    path: '/dashboard',
+    component: DashboardPage
   }
   /*{
     path : '/:pathMatch(.*)*',

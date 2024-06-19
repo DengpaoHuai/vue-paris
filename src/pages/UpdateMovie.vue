@@ -5,27 +5,32 @@ import crudcrud from '@/instances/crudcrud';
 import { useSnackbar } from "vue3-snackbar";
 import { useRoute, useRouter } from 'vue-router';
 import type { Movie } from '@/types/movies.type';
+import useMovieStore from '@/store/useMovieStore';
+import { useQuery } from '@tanstack/vue-query';
+import { getMovieById } from '@/services/movies.service';
 const snackbar = useSnackbar();
 const router = useRouter()
 
-
 const route = useRoute();
 const id = route.params.id as string
+
+const { data } = useQuery({
+    queryKey: ['movie', id],
+    queryFn: () => getMovieById(id),
+    staleTime: 10000
+})
+console.log(data.value)
 const currentMovie = route.meta.movie as Movie
 const movieForm = reactive({
-    title: currentMovie.title,
-    director: currentMovie.director,
-    description: currentMovie.description
+    title: data.value.title,
+    director: data.value.director,
+    description: data.value.description
 });
 
 
 
 const onSubmit = () => {
-    console.log(movieForm);
-
-
-    crudcrud.put('/movies/' + id, movieForm).then(response => {
-        console.log(response);
+    movieStore.updateMovie(movieForm, id).then(response => {
         router.push("/list_movies")
         snackbar.add({
             type: 'info',
@@ -49,6 +54,7 @@ const submitButtonOptions = {
 
 <template>
     <form @submit.prevent="onSubmit">
+        <p>Votre ID : {{ id }}</p>
         <DxForm id="form" :form-data="movieForm">
             <!-- Configuration goes here -->
             <DxGroupItem>

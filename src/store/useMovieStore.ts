@@ -25,10 +25,21 @@ const useMovieStore = defineStore('movieStore', () => {
     movies.value = movies.value.filter((movie) => movie._id !== id);
   };
 
+  const updateMovie = async (movie: Omit<Movie, '_id'>, id: string) => {
+    await crudcrud.put('movies/' + id, movie);
+    movies.value = movies.value.map((m) => {
+      if (m._id === id) {
+        return { ...movie, _id: id };
+      }
+      return m;
+    });
+  };
+
   return {
     movies,
     addMovie,
-    deleteMovieById
+    deleteMovieById,
+    updateMovie
   };
 });
 
